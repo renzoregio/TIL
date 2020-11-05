@@ -1,0 +1,57 @@
+---
+
+2020–10–05 / Blog
+Today is: November 5, 2020
+Currently working on: Airbnb Clone Project - Using Python, Django, Tailwind, HTML and CSS (Day 4)
+In the past few days, before I started this blog, I have learned so much. Django is definitely one of the most useful web frameworks. 
+It comes with so much utilities and it basically makes your life easier!
+What I learned in the past few days (before starting my blog):
+How to create an application in Django:
+- An application is a group of functions. It is like a folder where you have the admin, models, etc.
+In the terminal, you just have to:
+django-admin startapp (application name)
+After entering the application to the terminal, the output will be this:
+There are files inside these applications and it is important for you to not change the name because Django (once you start connecting and 
+using Django functions to the applications) is going to look for these file names. So it is important for you to keep these file names intact.
+Since Django is a framework, we have to follow the rules. And this is one of them.
+
+
+---
+
+How to create a Model in Django:
+I know, it is overwhelming. When I started the course, there were so much things I didn't understand. But now, it is actually quite simple.
+
+
+If you look at the code above, the first line says: class User(AbstractUser)
+In this scenario we are using object inheritance wherein we are creating a class and we are inheriting everything from AbstractUser. AbstractUser is from 
+Django - Django created this package that contains a number of information that we can use such as the username field, password field, personal information 
+field set (first name, last name, email) and so much more. We just have to import it and inherit it in our class sow e could use its functionality.
+After the first line you will see a Python convention called Docstring which is like a comment. If you are working on a project with a group, Docstrings will 
+help document the code for better organization as well.
+After the Docstring, we assigned strings to a variable which we then put inside a tuple. We will use these for our Charfields(Character Fields) that have more 
+than one option.
+Creating a field is quite simple. You have to use the Django models. So in each field we will have (name of the field) = models.(type of field - it can be a 
+CharField, TextField, ImageField, IntegerField, etc.)(arguments you would want to specify or that is required by the field). An example is the BooleanField, 
+we specified that the default=False. This simply means that in our admin panel in Django, it is not going to be checked. Another example is the language field. 
+In this field we specified that it has a max_length of 10 characters. Also having null=True so if the user decides not to put anything on the field, it is 
+perfectly fine as it is not a required field. Blank=True is the same concept. Though, do note that null is for the database and blank is for the form.
+
+
+---
+
+How to register the model in the admin:
+Registering the model in admin of the same application is simple. First you have to import the models file. As you can see on the third line, that is what we did.
+from "." (. means from the same folder) import models (models.py)
+After importing you have to register your model. So you have to follow the same as the code above.
+"@admin.register(models(which is what you imported).User(the class you made in your models.py)"
+"class CustomUserAdmin(You can make it any name you want) (UserAdmin)(since you are inheriting the information or code from UserAdmin made by Django)"
+
+
+---
+
+How to create fieldsets:
+This is basically the format:
+The fieldset is what you will see in you Django Admin:
+But the issue in this part is that I am only using the fields that I created. I need to add the fieldset made by Django. So the process is to just add to fieldsets:
+In the code above we are adding the UserAdmin.fieldsets because we want to use the fieldset that Django already made.
+Stay tuned and keep programming!
