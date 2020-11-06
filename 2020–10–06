@@ -1,0 +1,10 @@
+Validators in Django/TIL (Today I Learned)/2020–10–06
+
+I have a couple of integer fields. The purpose of these integer fields are to eventually get a total rating for a certain room.
+At first I thought that using max_length=5 would do the trick with limiting the maximum integer value to be ≥ 5. But it didn't work.
+Django ignores the usage of max_length for integer fields. Instead we would need to import a Django validator package called from django.core.validators
+import MaxValueValidator
+
+Upon installation we can make use of the MaxValueValidator to limit the maximum integer value a user can input.
+
+With the use of validators, we can now limit the integers the user can input on our interface.
