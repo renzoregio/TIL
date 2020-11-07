@@ -49,7 +49,7 @@ Now, if I search for "on", London won't show up anymore since we are using the p
 
 ![1_GvXm7KwxPtPTgZP6A1cStA](https://user-images.githubusercontent.com/72249533/98446165-adb29c80-2156-11eb-8d2b-3b255927ce7b.png)
 
-But if we search for "Lon" which are the starting letters for London. We will have a result because of the prefix ^.
+But if we search for "Lon" which are the starting letters for London. We will have a result because of the prefix ^
 
 ![1_XEXPw5D3iC6CeP0IbjhKXA](https://user-images.githubusercontent.com/72249533/98446185-bd31e580-2156-11eb-8c02-1a277f9c7f54.png)
 
