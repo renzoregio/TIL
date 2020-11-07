@@ -2,7 +2,7 @@ Today is: November 7, 2020
 Currently working on: Airbnb Clone Project - Using Python, Django, Tailwind, HTML and CSS
 Classes: Collapse
 Instead of having endless fieldsets containing dozens of information on one of your admin panels on Django (like the image below), 
-you can make use of classes: ("collapse",).
+you can make use of classes: ("collapse",)
 
 ![1_H0HDb4BF0UlmrgWSxo4WAA](https://user-images.githubusercontent.com/72249533/98445946-9cb55b80-2155-11eb-995b-0bc42cc785b6.png)
 
