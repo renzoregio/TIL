@@ -1,0 +1,22 @@
+Currently working on: Airbnb Clone Project - Using Python, Django, Tailwind, HTML and CSS
+
+Today I learned about seeding:
+First we have to create our own command in Django. To do so, it is quite simple. In any of our applications, we must create a folder. 
+In my case, I created a folder called "management". In the management folder, we must create an __init__.py so Django knows that this is a Python folder 
+and that Django will understand what we are trying to do. Next, inside the management folder I created a folder called "commands" - and in the commands folder 
+I also made another __init__.py file and made another .py file called seed_amenities where I will execute my command for seeding my amenities list. 
+
+First we need to import BaseCommand from the Django's core.management.base. 
+So that our command can be executed, we need to create a class that inherits the properties of BaseCommad. You can also add an argument 
+here but in this case we don't need it right now. 
+For every command that we make, we need to create a handle. The handle should always have the arguments self, *args and **options.
+After we create the handle, this is where we can put in the code that we want to execute. In my case, I need to create an amenities list 
+for my Django Amenities Admin. But before anything else, I had to import my Amenity model from my rooms application. 
+Now I need to connect each amenity in the list to the name field in my Amenity class. To do this we have to use the for loop.
+Note: self.stdout.write(self.style.SUCCESS("Amenities Created")) will show up in your terminal if the command was executed. 
+self.style.success will indicate the style/color of the string you put in the parentheses. self.style.SUCCESS shows green and 
+self.style.ERROR shows red.
+
+Let's execute our command in the terminal. We will use our seed_amenities.py as the command:
+It works!
+Now we have 42 amenities without the need of individually adding them in our Amenity Admin.
