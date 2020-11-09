@@ -1,0 +1,12 @@
+TIL/2020–10–09
+Today I learned about limit and offset.
+For example, let's say we have 100 objects in an array. And we only want to get the first 10 of the 100 objects. 
+To make this happen we can use limit.
+In the image above we retrieved all the rooms from room_models.Room.objects.all(). Now, all_rooms contains 100 rooms. 
+I only want to get the first five rooms instead of loading everything in the page. To do this, I used limit. [:5] is basically telling 
+Python to only load the first five rooms in the current page. And if we move on to the next page, we will load another five. To load the other five
+(meaning, to load the next five rooms after the five rooms we just printed), we would need to make use of offset.
+
+Offset would be the other variable inside the [:]. So, if we include offset as [10:20] we will be loading the next 10 rooms. 
+We will skip the first ten and start with the second ten from rooms 10–20. 
+So, if we want to get the next 10 rooms after room 20 we will do [20:30]. And it just goes on.
