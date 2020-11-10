@@ -1,0 +1,12 @@
+Today I learned how to use Python on HTML.
+I am currently trying to clone Airbnb. Today, I am slowly creating my home page by using Python and HTML.
+There are a few things that I want to highlight:
+Using for loop in HTML:
+In the image above, I am in a .html file. To be able to use Python and its functions such as the for loop and if statements we need to use the symbols {% %}. 
+In the middle of the symbols, this is where you can put in your functions.
+Though, do note that using the for loop or if statements in HTML does require you to close those functions. As you see in the images above, there is an 
+{% endfor %} and an {% endif %}. Without ending your Python code, it simply won't work or it will generate an error that tells you to end it.
+Using HTML in the Python for and if statements:
+Even if you created the {% for __ in __ %} {% endfor %}, doesn't mean that you cannot use HTML code inside it. As you can see in the images above, even if 
+am inside or outside the Python functions (as long as I am in the .html file) I can freely use HTML either inside or outside the Python functions.
+If you are wondering about what {{pages}} or {{pages|add:-1}} means, it will be on my next blog! See you there!
