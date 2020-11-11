@@ -1,0 +1,20 @@
+In my previous TIL, I talked about what {{page}} and {{page|add:1}} meant on my .html file (see image below).
+But before that let me talk to you about HTTP requests. Basically, every time you go to a URL you are making an HTTP request. And those requests 
+would always need an HTTP response. 
+In my case, I have a couple of applications and I basically connected it to the config urls.py.
+After setting those up, this is what I did in my views.py on my rooms application. First we are making a function that would receive the request, hence the 
+(request), and ultimately send a response. 
+As you can see on the first line, I did a request.GET.get("page"). And when I first encountered this, I also thought to myself: why is there a "GET" and a 
+"get"?. Well the reason for the first "GET" is that it pertains to the HTTP GET pertains to a dictionary that has all the GET parameters. And the second "get()" 
+is actually coming from the query dict itself. It is a method that the query dict has and it requires a key argument. That key argument is what will be on the URL.
+In my case it is "page". I am trying to change pages (using previous and next) and populate each page with different rooms.
+Next, you can see room_list where I am trying to retrieve all of the Room Models objects.
+On the next line, I am making use of Django's paginator (Don't forget to import paginator: from django.core.paginator import Paginator)
+Paginator allows us to use a number of functions with only minimal programming. Instead of assigning values to offset and limit, Paginator allows us to take a 
+step back and relax a bit. In this example, Paginator takes up two arguments: a list (room_list, which retrieves all of my rooms as objects and an integer (10) 
+which limits 10 rooms/objects per page.
+Next we are using get_page() is one of the two methods you can use. get_page() basically returns a page object. So rooms represents 1 page.
+The reason why I printed vars(rooms.paginator) is to be able to look inside and see what I could use for my .html file.
+render is what connects the views.py to the .html file that you want to work on. The first argument of render takes on the HTTP request, the second argument is 
+the path to where my .html file is, and context is used when we want to transfer python variables/elements to our .html file. 
+Which leads to the reason of using {{}}. And for this, I will discuss on the next blog! See you there!
