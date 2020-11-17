@@ -1,0 +1,46 @@
+Today, I learned about Django's field lookups and using it in conditional filtering.
+First let me talk about Django's field lookups. If you want to take a look at the documentation, it is located in the QuerySet API Reference under "Field lookups".
+I used Django's field lookups using the filter() method where I am trying to filter the QuerySet that I have. My QuerySet contains around 151 rooms/objects that 
+were previously made in my models and were seeded. You can also use Field lookups in get() and exclude() method as well. Today I will talk about how I used it with 
+filter().
+There are different ways where you can use field lookups in filter(). You can filter by exact (exact match), contains (as long as it contains the characters), gte 
+(greater than or equal to), lt (less than), lte (less than or equal to) and more.
+I am currently working on an Airbnb Clone project and to use Django's field lookups, I used conditional filtering to be able to get the values from my rooms QuerySet.
+
+![image](https://user-images.githubusercontent.com/72249533/99367316-c4928500-28f4-11eb-8652-60708f48a7ea.png)
+
+
+This is from my models.py in my rooms application. To give you some context to where I am getting my values and why I am using city, country, room_type, etc. is 
+because I am getting these and filtering these from my Room Model QuerySet. That is why, whenever I filter, I can get the values that I am looking for - since 
+these already exist in my models and I am just basically going back and looking it up using field lookup and filtering.Example 1: As you can see, I put a default 
+argument "Anywhere" on city.
+So, to use Django's field lookups, the format is field__fieldlookup. I used startswith because I want to get all the cities that have the starting letters of a 
+city - regardless if everything that comes out are different cities.
+And then I placed city__starswith inside filter_args with the name "city". Then I used room_models.Room.objects.filter(**filter_args) since "city" is already a 
+field in my room_models.Room. (Note: ** unpacks filter_args' contents).
+And on my .html file that is connected through render from my .py file, I used context to transfer "rooms" (which contains my filter_args) to the .html file so 
+I can use it. Since I am going to go through hundreds of rooms (which were seeded), I have to use a for loop to be able to get each individual room and their name. 
+(Note: all of these have been made in my models.py and I am now currently only working with my views.py and search.html).
+Just to give you some context, this is my Django-Admin and I searched new to see all the rooms that have the words "new" at the beginning. As you can see, the 
+word "new" comes from different cities. This is the same as what I want to achieve on the site.
+By using city__startswith and filtering it through my Room model, I am achieving that function. Below is the site:
+So when I search for "new",
+Results would show everything under "city" on my model that has "new" at the beginning.
+Example 2: Let's change __startswith to __exact.
+Now, even when I search for "new" there will be no results because there is no city that only has "new". All of the cities that have "new" at the beginning has a 
+word after it.
+Example 3: Let's just change it to __icontains. Which means it is case insensitive (But it doesn't matter since we put str.capitalize on city).
+As you can see, the number of rooms increased from 9 to 14 because we are using the field lookup: icontains.
+Now let's use __lte which means less than or equal to with price. We will be looking into Philippines and their prices.
+This is an the Django-Admin - which contains all the fields that we put on the model as well as the information we seeded. All information are made up.
+Note: I have already filtered other fields such as city, country and room_type but we will leave them as blank except country since the three have different 
+contents in room_type and city. Because when we filter, all have to be True. In this case, for example purposes, we will only filter the city and the price and 
+then leave the others blank / default.
+First let's try to filter just the country:
+We only have three rooms - like what is shown on the Django-Admin.
+Now let's filter the price by adding numbers on the form. On django-admin, two of the rooms are above 10,000 and one is below 10,000. Let's filter by only having: 
+Since we did price__lte - it means the the price must be equal to 10,000 or less than 10,000.
+Now only one room shows up because only one room is less than 10,000.
+Now let's try filtering 3 things: room_type, price(lte) and country. We will still use the Philippines.
+If you recall, there are three rooms below 20,000 but only one room is being filtered because we added the room_type in the filtering process. This means out of
+the three rooms, only one room has the room_type: entire place AND a price of 20,000.
