@@ -1,0 +1,29 @@
+Today I learned about Django's Forms, Email Validation and CSRF Part 1
+Before anything else, let's go through the process of properly creating our login form:
+In our users application, let's add a forms.py file which will be used to create our login form.
+Inside our forms.py file we need to import forms from django to be able to create our form fields.
+Similarly in how we create our models, we use the same format - but replacing "models" to "forms".
+After creating our form, let's go to our views.py:
+In views.py we have to import a couple of things:
+Render - since render is the one connecting the HTTP Request, HTML template and the python elements we create to our HTML template by using context.
+Views - in this case, we will be using View rather than DetailView or ListView. When we use View, it is automatic to include def get(self, request) and def 
+post(self, request) since we will be using the get and post methods for our validation.
+Forms - Obviously, we have to connect our forms.py to our views.py which will eventually be connected to our template.
+And on our users/login.html, since we used context to use the "form", we can make use of it in out .html template as {{form.as_p}}.
+After doing so, this is what we get:
+As you can see it is not password protected. In the forms.py, we can adjust that setting by adding a widget to the Password field.
+Now let's go back to the .html template and let's create a form and a button so that we can connect it.
+After trying to log in, this is the error that we'll get:
+This is where CSRF comes in. CSRF means Cross Site Request Forgery. To explain it in a few words, whenever we login to a website we receive cookies from that 
+website and whenever we come back we give the cookies automatically. For example, we are on a third party website and there is a form/button that let's us login 
+to another website. When we send that form or use that button, the website that we are trying to login to is receiving a POST request from the third party website 
+using our credentials. The issue with this is that the third party website could possibly take advantage and learn how to make you change your password or perform 
+some action on the website. And the way we prevent this, the way Django fights against these types of actions is by using a CSRF token. We can insert this in our 
+.html file:
+Now, because we inserted {% csrf_token %}, Django automatically inserted this input:
+Having this token means that if someone from a third party website tries to send a POST request to our website, whatever he sends won't work - there will be an 
+error - because he doesn't have the token Django provided for us.
+The token verifies that the POST request is coming from our website and not somewhere else. This protects us and our website since we don't want people to login 
+from any website. We only want to answer to the POST requests sent by our website.
+Now let's handle the form by sending a POST request.
+Now if we print the form, we'll see that it is receiving the information from the input.
