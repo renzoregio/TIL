@@ -1,0 +1,15 @@
+TIL/2020–11–15
+Today I learned about: Django's send_mail function, django-dotenv, and how to use Mailgun Part 1
+This is in continuation of my Airbnb clone project. I am trying to use Mailgun (Email Service/API that lets users send, receive and track email) as a means to send a verification email for the user who is signing up with his/her email.
+First of all I had to sign up in Mailgun to be able to use their features. In the Django Documentation regarding send_mail and how to use it, we need to configure my config settings.py and have the following:
+EMAIL_HOST = ""
+EMAIL_PORT = ""
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
+These are what send_mail(once we call it in our function) will look for and use to send the email we want. For us to fill the variables above, we have to go to Mailgun and go to their SMTP Credentials. And retrieve the needed information for each variable above. Note: Based on my understanding, the process is basically Django's send_mail requires these variables to know who is sending the email and from where(which server).
+Since we are placing our EMAIL_HOST_USER and our EMAIL_HOST_PASSWORD on our settings.py it will automatically be added to git and github unless we add it to our .env. So, we can create a .env file and create and from there add our EMAIL_HOST_USER and EMAIL_HOST_PASSWORD.
+After placing the necessary information, we have to install django-dotenv. On the terminal we can install by pipenv install django-dotenv.
+After successful installation, all we have to do is go to our Manage.py and from there, import dotenv and before we call main(), we will include dotenv.read_dotenv()
+Now that our .env file is being recognized by Django (since we put it on manage.py and placing it before main() is called, Django is now aware that we have a .env file and it will read the contents.
+After that, we can now retrieve the data from our .env file by placing it on the variables EMAIL_HOST_USER and EMAIL_HOST_PASSWORD. We can place this by: os.environ.get("MAILGUN_USER") and os.environ.get("MAILGUN_PASSWORD). By doing this, we are retrieving the variables from our .env file and placing it inside our settings.py.
+Now that we are able to do that, we can now make sure or double check if .env is in our .gitignore so the sensitive information (username/password) will not be uploaded.
