@@ -1,0 +1,25 @@
+TIL/2020–11–14/Django's Forms, Email Validation Part 2
+The next step is to use the function: .is_valid. Here we will see if the data is valid and then we need to add the errors manually in the case if it is not valid.
+After trying to login and entering my email and password, it returns True because it is telling us that the form is valid. But now we don't know if the user exists or if the password matches. So the next step is to clean our fields.
+Now the next step is to create methods for our email and password fields. To do this, it is required to use "def clean_fieldname(self):" because it is what Django will look for when we try to login. The method clean_email and clean_password takes on one argument: self.
+Now, if we go back to our views.py, let's use an if statement. So, if the form is valid then we want to print the cleaned_data of the form. The cleaned_data represents the data we return from clean_email and clean_password from our forms.py. Note: cleaned_data is the result of cleaning all of the fields.
+Now if we try logging in again we will have these on our console:
+We are only printing "clean data" and "clean password" but our email and password fields are returning None because we haven't returned the values that it is supposed to take. If we implement a clean method without returning anything, it will only show up as None since nothing is returned - it is like we are deleting the field.
+Let's use return instead:
+So if we return something, that will be recognized by the field as the cleaned_data.
+Now if you look, what we returned is inside of the form.
+Now we just have to validate email and return the proper values of what the user places on the input. Note: this is the way of validating individual fields, not fields that depend on each other.
+Let's do email first. We will use try for the data that is valid and except if there is any error.
+First, we said email=self.cleaned_data.get("email") - this is basically getting the value of what is on the email field.
+Next, we used try. If the data is valid(if it is an email) then we will try to validate it by going to our database and getting all of our user's emails and checking if there is a valid email that matches what the person placed on the input. and if it is valid we will return in.
+Lastly, we used an except because if the User does not exist, then we will raise a validation error that would say: User does not exist: please try again. Since Django cannot find anything in our database that matches wha the person placed in the input.
+And this is the result:
+Now it works because there is no such user in our database that has this email. Since there is no user that has this email our except will execute and we will raise the validation error.
+And if we look at our console, nothing got printed because the form is not valid.
+Now if I place an actual email that exists in the database, it will work:
+There is no error on the email field.
+Recap:
+First we try to clean the email that the user sends us
+Next we try to look for the email if it exists in our database
+if it does not exist, if there is an error in try, it will go to except - and it will raise our validation error
+if it exists then we will return the email
