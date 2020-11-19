@@ -1,0 +1,31 @@
+Today I learned about how to use Django’s send_mail function and a little bit of how Mailgun fits in to the process Part 2
+In my previous blog, I talked about dotenv and a little bit of Mailgun and send_mail. Now, let’s verify our emails!
+To start, I added a new field on my User model:
+Image for post
+This is basically for us — the admin — to see in our User admin panel if our Users have verified through email. So, by default it is False and once they have verified through the email verification sent by Mailgun, it will turn True.
+Next, we need to be able to create a key/code that the user will click on and make his/her account verified. For that, we will use something called uuid which generates random characters — both strings and integers. We will use this as our key/code. So, let’s create another field on our User model:
+Image for post
+After creating that our two fields on our User model, let us now make another function called verify_email which takes on the argument of self and import uuid for our key/code.
+To start things of in our verify_email function, let us use an if statement:
+Image for post
+Here we are basically saying that if our email_verified is False then we will create a key composed of a uuid.uuid4().hex[:15]. For a little background, uuid means universally unique identifier. We called it and used uuid4 because uuid4 generates a random uuid — we also added .hex because it makes it a 32 character hexadecimal string which we then limited to only 15 characters so it won’t be too long. Next we gave our email_key field the key/code.
+Next is going to be about send_mail. So for now, let’s skip what html_message = render_to_string means. We will get back to that later on.
+Note: Do not forget to import send_mail (from django.core.mail import send_mail).
+Image for post
+send_mail takes on the following:
+Image for post
+What is important for us is the subject, message, from_email, html_message and fail_silently.
+Subject is basically our message header when we send the email. Since I am currently working on an airbnb clone project, my subject is “Please verify your Airbnb Clone Account”.
+Next is the message, the message is a bit complicated as it takes on a couple of things. You can simply place a message if you would like but for me, I need to send an anchor <a> containing a link for my key/code. And the fact that we can’t simply add an anchor to the text (since it will not be an anchor once we execute, it will be a string and what will show up is <a href=”___”> here </a>. So what we need to do first is to make an html_message and call it. For that we need to import render_to_string. render_to_string basically calls a template that I made in my templates folder. The template contains my message:
+Image for post
+This is the template folder that I made
+Image for post
+I haven’t configured any CSS to make it look nice since we are still building it up.
+render_to_string allows me to call this template and also add a context so I can add my python variable to the .html file. So, we are calling the template and adding our key/code that is composed of the 15-character hexadecimal uuid. After making our html_message variable we can now call it with strip_tags (strip_tags is something that you also have to import — from django.utils.html import strip_tags — ). strip_tags is basically returning our HTML without the HTML tags, so it strips out all the tags and just returns the string. So for that we will place our html_message inside for the message section of our email.
+Next is from_email. For that we created a variable: EMAIL_FROM in our settings.py. EMAIL_FROM has to be from the one we are using from Mailgun.
+Image for post
+This will appear as the sender of the message.
+Next is going to be to whom are we sending the email to. For this, we are sending it to self.email (to the person who is trying to create an account — we will send it to the email they entered).
+Next is fail_silently. Fail_silently is basically asking if there is an error would you want to show an error. If you place False then it would show an error. If True then there would be no error (Not a 100% sure — but this is how I understood it)
+Last is html_message=html_message. This is basically allowing us to send an html_message inside the email. And our html_message is the template that contains the anchor for our key — which is the most crucial part.
+After creating send_mail, we shouldn’t forget to save and return. The reason why we are returning is because we are calling this function on our views.py.
