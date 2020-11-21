@@ -1,0 +1,9 @@
+Connecting to what I did on my previous TIL: I updated my log in form. I realized that users could log in as long as they sign up — even if they haven’t verified their email yet.
+Previously it was:
+Image for post
+And I updated it to: The change I did was to add another condition to my if statement. Now users cannot log in if the field “email_verified” is false(Which is the default when someone signs up).
+Image for post
+It only turns True when the user verifies by clicking the email_key(url in the email) that was sent to their email.
+Image for post
+Only then can users log in, once their emails have been verified.
+I realized that it is always good to look back and see if there is anything I missed or anything I need to add or work on. It is always good to review your application/page so you can always update it and keep it in the highest and best version.
