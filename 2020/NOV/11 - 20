@@ -1,0 +1,20 @@
+Today is my second day working with Tailwind CSS and I already picked up a couple tricks as well as became more familiar with using the framework.
+One of the things I want to highlight is that even if there are classes that are already built and everything is set, Tailwind CSS actually allows us to customize/modify their classes.
+A perfect example is the image below. Tailwind CSS already comes with set heights/widths/etc and basically in the tailwind.config.js, this is where we could customize those classes. We can add a certain height or width or whatever you need. To customize or add to a certain class, we just need to place it on extend:{}, because if you place it on theme it will just override the whole class and remove what is already set — though you will create your desired ones.
+Image for post
+On the image is says “25vh”: “25vh”. The first variable is for the classname and the one on the right goes to css (Since we are using a static file for CSS — which is required for set-up, since browsers can only read CSS if I am not mistaken — so we are basically using CSS through the help of Tailwind CSS which makes everything more productive).
+And now when I call the class, my customized variable is already part of the list because we added it and extended the h- variables(height). And we could do that in any of the other classes.
+Image for post
+Consequently, we can also add our own classes by doing it on our styles.scss files. We can use this whenever there is a certain button or html element that would use the same exact classes. And by creating our own class, we would’t have to keep copying the same code over and over again — we just need to give the html element the class name we configured.
+For example, in my project, I have multiple input elements (that are coming from python — because it is an input field from my Django models). Since all of these elements are going to look exactly the same, the only difference being the border-color or background-color, then I thought of just making 1 class for all of it so that I don’t have to keep repeating my code.
+This is my styles.scss. This is where we can create classes and “@apply” them (For the classes to be part of the list of classes/database of classes by tailwind in our system, we need to use “@apply” because if not then it will not work or there will be an error).
+Image for post
+Specifically let’s look at .login_box. It is a class I made for all my login/sign-up input elements.
+Prior to making my class .login_box, this is what I had for my login.html. Also, I still have signup.html that contains 6 other which would look almost exactly the same.
+Image for post
+This is the output for my login.html
+Image for post
+This is the output for my signup.html
+Image for post
+As you can see, they are identical and there are only a few differences in terms of border-color and background-color (if any). Because of Tailwind CSS the time I spent coding was more efficient and productive. Also, I didn’t have to repeat my code every single time. The functionality and effectivity of Tailwind CSS is truly helpful when it comes to things like these. Of course, my background of CSS was definitely useful/helpful when it came to making decisions on how to do the layout and my knowledge on how things would look like if I use a certain class. I didn’t have to thoroughly read how things apply when the classes are used, but it is definitely a user-friendly interface for beginners.
+Being able to customize/add classes in Tailwind is definitely a plus! With this, I am not limited to the pre-built classes.
