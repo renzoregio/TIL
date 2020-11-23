@@ -1,0 +1,17 @@
+Since I will be using room_cards on multiple html files, I learned how to — even if there is a for loop — place the variables and just extend it from a different html file. Apparently, if I just include the .html file (that contains the variables) in the for loop, the for loop still applies. It still functions even if I am working on a different html file. I am still getting the variables of the for loop from HTML FILE 1 even if I am working on HTML FILE 2.
+Below is my HTML FILE 1, since I will be using this a lot I decided on putting it on another .html file and just include the HTML FILE 2 inside the for loop of the HTML FILE 1.
+Image for post
+HTML FILE 1: Before
+Image for post
+HTML FILE 2: After
+Image for post
+HTML FILE 2
+Also, it is my first time working with HTML, Tailwind CSS and Python (and Django) on one file. It was a bit confusing as first, but I eventually got used to it. There were a lot of tasks that I did such as making if-else statements and also adding an if statement inside a class attribute of an html element.
+This is one example of what I worked on for my signup.html that makes use of HTML, Tailwind CSS and Python — it is where users sign in and with the use of Django’s authentication and of course Python I was able to make a really good signup form.
+Below you can see that in my <div> it has a class and inside that class is an if statement. Basically has_error is one of the classes I configured on Tailwind CSS and the function of it is that the border of the div that contains the input turns red when there is an error. So, basically if the form.email.errors is True then it will add a class has_error, and if not then it won’t be added (We are basically reacting to the errors). I was really fascinated at the functionality of using all of these together and it really makes me more interested in the things I could do. It seems like I can really be able to do a lot of things just by knowing Python and how to use it.
+Image for post
+Output of the code above: As you can see, we are reacting to the errors — so my if statements are working. If there is an error then the border turns red.
+Image for post
+
+
+
