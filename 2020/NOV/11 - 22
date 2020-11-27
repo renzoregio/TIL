@@ -1,0 +1,9 @@
+Today I learned how Django can really make someone’s life so much easier. In my previous TIL, I talked about how I made a sign in form. And there were some repetitive coding because I would need to manually do it for each field/input. Since I have first_name, last_name, email, password, and confirm_password fields I really had to do it repetitively if I wanted to use hardcore 100% Python code.
+Image for post
+100% Python Log In Form
+Note: I used FormView for my login and signup forms.
+Image for post
+But there is actually a much more easier way. And it is through using Django’s “looping over the form fields”. Basically, we just have to create a for loop in the html file and just place the proper variables. By using this it simplifies the code and lessens the time you spend on it.
+If you look at the code below it says for field in form. Why field? because in our forms.py, our first_name, last_name, password, etc are all fields. and why form? it is because what we created is from a FormView. Also, these are the variables that Django will look for if you make use of this method. The code below does exactly the same functions as the 100% Python code. And it is that simple.
+Image for post
+Though, sometimes I do prefer doing 100% Python code more because it shows me the detail of how everything works and functions from the backend.
