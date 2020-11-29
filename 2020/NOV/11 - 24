@@ -1,0 +1,22 @@
+Today I learned about Django’s messages framework. It is used for showing one-time messages/notifications (or flash messages).
+Like any other, we always have to import: from django.contrib import messages.
+messages contains message tags. The message tags are: debug, info, success, warning and error. It is up to us on which tags we want to make use of — depending on the need or requirement of what you are trying to do. For example, we can use the success tag if a user successfully logs in. Or we could use the error tag if the user is not allowed to access a certain page. Or we could use the info tag to show relevant information to the action.
+An example of how I did it is:
+First, create a template for the messages — because we have to include it on our base and also style it with CSS.
+Image for post
+After including the template on the base, I can now add a message in my views.py in the function.
+Image for post
+So after I login or after the user logs in, we will call messages. To call messages we just have to do messages.messagetag(request, “message”). It is very simple and quite effective especially once we style it with CSS. In my case, once a user logs in I want a message.success(because the user successfully logged in) to welcome back the user with the first name. Note: messages always takes on a request as the first argument. Without the request, it will not work.
+Image for post
+After styling it a bit with Tailwind CSS classes, this is what I got:
+Image for post
+I think it looks pretty good! Whenever a user logs in, a one-time message pops up and welcomes the user with the first name.
+and since we are styling it, I can make it even better with:
+Image for post
+Since it is a class, message.tags will automatically give out a .success .error .info class which we then configured to show different colors.
+And the configure our class with the if statement. Because if message.tags is true, we will insert whichever message tag it returns, may it be error, info, success, etc. And each corresponding tag, will receive the color that we applied through Tailwind CSS above. So if I have a messages.success then the background color will be green.
+Image for post
+As you can see, message tags are not really necessary but it is definitely a plus to have them. It shows the interactivity of the website and also provides the user with more information (like if they successfully logged out or if they successfully completed an action), so I think that even if it is not necessary it could also be an important feature for some users.
+Note: the fact that the message is on the center with a background-color and at the very top is because I configured it with CSS. Just using messages alone, will render the message wherever you set it on. In my first try, it looked like this:
+Image for post
+Depending on your requirements, you can style your message like how I did it. Or how you want your message to appear to the user.
