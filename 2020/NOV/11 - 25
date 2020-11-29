@@ -1,0 +1,27 @@
+Today, I was able to familiarize myself more with using HTML, CSS and Python on my template. I am currently working on the Profile page of my airbnb clone website. It is definitely a good practice to be able to make use of if statements in inside a class — and also practice using flex containers and more.
+This is how I started it:
+Image for post
+Image for post
+Eventually, I just kept on adding and adding more things:
+If the person is a super host:
+Image for post
+Image for post
+Note: All information were populated by the seeder I made.
+Now the issue is that we are logged in as our own user but we can see someone else’s “Edit Profile”:
+It is quite simple to fix that, just use an if statement:
+Image for post
+And I wouldn’t be able to see someone else’s edit profile.
+Now we want to get the list of rooms that the user has:
+Image for post
+Image for post
+I noticed that because my room_cards are tailored for the home.html — I should make another html file and adjust it for my profile page so that it wont look like this:
+Image for post
+Image for post
+Also I noticed that some photos are portrait, that’s why its not even to the landscape photos. So I decided on just deleting the photo and I will also delete my seeded users, rooms reviews etc. And do it again.
+I deleted the photos that have different width and height. And also adjusted the width again because w-auto will auto adjust the width — so it is not really in a fixed position. I want a fixed width so that regardless of the number of rooms the user has — may it be 1 or more — then the size of the photo is fixed.
+If it is auto, it auto adjusts to the size of the container and having different number of rooms per user would show different sizes of the image depending on how many rooms they have. Using fixed width is desirable when it comes to these types of situations, especially when we’re handling variables that differ.
+Image for post
+And now, the output: see the different users that have different number of rooms. The size of the image is fixed. If I placed it on auto — then it will auto adjust to the fixed container size, and if a user has a lot of rooms, then the images will be very small. While if a user only has 1 room, the image will be bigger than normal.
+Image for post
+Image for post
+Image for postImage for post
