@@ -1,0 +1,16 @@
+Today I learned about Django’s UpdateView.
+Django truly has a lot of tricks and it definitely makes our lives easier. UpdateView has to be imported: from django.views.generic import UpdateView.
+Below is my code for updating my user profile. UpdateView requires a model — the model you want to edit/update. Next, I placed template_name because I wanted to use my template_name instead of what UpdateView will ask me for (If you work through it and run your server, without placing a template name, UpdateView will ask you to create one with a template name it generated. So you can use that or use this to override the template name.). Next is fields, fields is required by UpdateView because we are basically getting the fields (from the model that we want to update/edit) and putting it on a form to update. Django will create a form for you automatically since we are using UpdateView and it will also create each field’s input field.
+Image for post
+Note: The reason why I used the method get_object is because update view also automatically looks for a pk or slug in the url. In my case, I did not want to add a pk on the url since the user does not need to know/see that type of information. Since the user is editing his/her profile, there is no need to show the pk. So with the use of get_obj, it returns the object the view is displaying. In this case, it returns the user. See the url below:
+Image for post
+This is my template:
+As you can see, we need to place it on a form. Also, since we are using Django, do not forget to add {% csrf_token %} because it is what allows you to update the form in the database. Without the csrf token then there will be an error. CSRF means Cross Site Request Forgery (I talked about it in one of my TIL’s but basically this is what protects our website from third-party apps from editing or retrieving information from our website — especially the information that should be private). Also the method of the form should be POST since we are going to POST the new data.
+Image for post
+Please disregard change password since I will still be working on it — I just got the form from one of my other templates which has a similar layout
+Also, do not forget to add a button/input so that it will initiate the submit function to update the form.
+This is what I got with the code above. UpdateView retrieves the field from the fields we specified. With the use of CSS, I made it look like this:
+Image for post
+And once we select edit profile, and since we are using UpdateView, Django automatically redirects us back to our profile page and updates the information for us in our database. It redirects us back to our profile page because of the get_absolute_url method we put on our model.
+Image for post
+We didn’t have to create a form, we didn’t have to clean any fields, we just used UpdateView and it updates the information for us.
