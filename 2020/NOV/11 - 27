@@ -1,0 +1,20 @@
+Today I learned about Django’s ChangePasswordView. Similarly to UpdateView, ChangePasswordView creates the change password form for us — and actually, without any CSS or rendering a template, it redirects us to the Change Password section of the Django Admin.
+Without rendering a template or styling with CSS:
+1. Create a class for PasswordChangeView (And of course, always import!)
+Image for post
+2. Create a path in your urls.py
+Image for post
+3. In your Edit Profile template (You would have a change password anchor) — add the url to that anchor so it redirects you to the default template which is the Django Admin Change Password.
+Image for post
+4. It redirects you — and you didn’t have to do much!
+Image for post
+5. Of course, you wouldn’t want your user to be going to this page — since you would want everything to be coherent to your website you must render and create your own change-password template.
+(Of course, in the ChangePasswordView class — image 1 — you have to specify the template name so it knows where to go)
+Image for post
+Image for post
+6. And this is what we get! Though there are no placeholders..
+Image for post
+7. We can simply add {{field.label}} inside each field and we will have this:
+Image for post
+Image for post
+8. But it would be better to just have a placeholder instead of a label. And for that I will talk about on the next one!
