@@ -1,0 +1,11 @@
+Today I learned about using Django’s get_form to retrieve the form and add a widget to each one. This is in line with my previous TIL since placing labels wouldn’t be as good as having the placeholder (Since the label would also take up space in the field — and it is not visually practical as well).
+Using Django’s get_form(self, form_class=None) method is quite simple.
+In the class you made for changing the password, you just have to add a get_form method like below:
+Image for post
+First you always have to call super().get_form(form_class=form_class) and translate it into the form variable as so: form=super().get_form(form_class=form_class). This is basically taking the form of the model.
+Next you have to add the fields of the form by doing the three lines above after calling super(). You are basically calling the field [“old_password] and placing/customizing the widget and adding an attribute placeholder for each and every field.
+Lastly, we ALWAYS have to return the form. If we do not return the form we are basically deleting the form because using the method get_form overrides the previous form that was made and returning it, it would return None.
+Image for post
+And the image above is the final output with the placeholders we just added. Isn’t it better than having labels?
+But we’re not yet done! What happens when we click change password?
+I will let you know on the next one!
